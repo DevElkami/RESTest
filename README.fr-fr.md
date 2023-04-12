@@ -4,7 +4,7 @@
 ![](https://github.com/DevElkami/RESTest/actions/workflows/workflow.yml/badge.svg?branch=main)
 ![CodeQL](https://github.com/DevElkami/RESTest/actions/workflows/codeql.yml/badge.svg)
 
-# RESTest :computer:
+# RESTest :octocat:
 Testeur d'api REST
 
 # Aperçu de l'application
