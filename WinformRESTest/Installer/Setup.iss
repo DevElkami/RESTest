@@ -39,8 +39,8 @@ WizardStyle=modern
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}";
 
 [Files]
-Source: ..\bin\Release\net7.0-windows7.0\publish\WinformRESTest.exe; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly;
-Source: ..\bin\Release\net7.0-windows7.0\publish\*.dll; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly;
+Source: ..\bin\Release\net7.0-windows7.0\publish\win-x64\WinformRESTest.exe; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly;
+Source: ..\bin\Release\net7.0-windows7.0\publish\win-x64\*.dll; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly;
 Source: ..\..\LICENSE; DestDir: {app}; Flags: overwritereadonly uninsremovereadonly; DestName: LICENSE.TXT
 
 [Icons]
