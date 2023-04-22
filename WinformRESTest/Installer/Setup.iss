@@ -1,5 +1,5 @@
 #define MyAppName "RESTest"
-#define MyAppVersion "1.0.0.0"
+#define MyAppVersion "1.1.0.0"
 #define MyAppPublisher "DevElkami"
 #define MyAppURL "https://github.com/DevElkami/RESTest"
 #define MyAppDescription "RESTest"

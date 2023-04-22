@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Data;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
@@ -10,6 +11,17 @@ namespace RESTestCore;
 /// </summary>
 public class RESTestCore : INotifyPropertyChanged
 {
+    private readonly SynchronizationContext syncContext = null!;
+
+    public RESTestCore()
+    {
+    }
+
+    public RESTestCore(SynchronizationContext syncContext)
+    {
+        this.syncContext = syncContext;
+    }
+
     #region Properties
     public String Url { get; set; } = null!;
     public String Data { get; set; } = "";
@@ -48,6 +60,9 @@ public class RESTestCore : INotifyPropertyChanged
 
     public async Task SendAsync()
     {
+        if (syncContext == null)
+            throw new NoNullAllowedException("You must give a context");
+
         await Task.Factory.StartNew(() => Send());
     }
 
@@ -102,8 +117,19 @@ public class RESTestCore : INotifyPropertyChanged
         }
         finally
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("HttpResponse"));
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("HttpContent"));
+            if (syncContext != null)
+            {
+                if (PropertyChanged != null)
+                {
+                    syncContext.Post(_ => PropertyChanged(this, new PropertyChangedEventArgs("HttpResponse")), null);
+                    syncContext.Post(_ => PropertyChanged(this, new PropertyChangedEventArgs("HttpContent")), null);
+                }
+            }
+            else
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("HttpResponse"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("HttpContent"));
+            }
         }
     }
 }

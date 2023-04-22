@@ -2,22 +2,23 @@
 using ReaLTaiizor.Forms;
 using ReaLTaiizor.Manager;
 using System;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace WinformRESTest;
 
 public partial class MainForm : MaterialForm
 {
-    private readonly RESTestCore.RESTestCore restTest = null;
+    private RESTestCore.RESTestCore restTest = null;
 
     /// <summary>
     /// Main form constructor
     /// </summary>
-    public MainForm(ref RESTestCore.RESTestCore restTest)
+    public MainForm()
     {
         try
         {
-            this.restTest = restTest;
+            restTest = new RESTestCore.RESTestCore(SynchronizationContext.Current);
             InitializeComponent();
 
             MaterialSkinManager.Instance.AddFormToManage(this);
@@ -72,7 +73,7 @@ public partial class MainForm : MaterialForm
         }
     }
 
-    private void materialButtonTestApi_Click(object sender, EventArgs e)
+    private async void materialButtonTestApi_Click(object sender, EventArgs e)
     {
         try
         {
@@ -88,7 +89,7 @@ public partial class MainForm : MaterialForm
 
             Properties.Settings.Default.Save();
 
-            restTest.Send();
+            await restTest.SendAsync();
         }
         catch (Exception except)
         {
