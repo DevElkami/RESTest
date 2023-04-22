@@ -62,9 +62,8 @@ static class Program
             MaterialSkinManager.Instance.EnforceBackcolorOnAllComponents = true;
             MaterialSkinManager.Instance.Theme = MaterialSkinManager.Themes.LIGHT;
 
-            // Run app
-            RESTestCore.RESTestCore restTest = new();
-            Application.Run(new MainForm(ref restTest));
+            // Run app            
+            Application.Run(new MainForm());
         }
         catch (Exception except)
         {
